@@ -20,6 +20,7 @@ Text tools - Work in progress
 ## TODO 
 
 * constructor -> checkbox
-* CSS engine
+* *CSS engine*
+* *SAVE function*
 * Nog veel meer :)
 
