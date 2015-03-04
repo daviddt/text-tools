@@ -1,0 +1,39 @@
+[
+	{
+		"fieldsetName": "Basics",
+		"children": [
+			{
+				"label": "font",
+				"type": "select",
+				"css": "font-family",
+				"target": "html",
+				"unit": "",
+				"value": "",
+				"options": ["Georgia", "Helvetica", "Arial", "Times New Roman"]
+			},
+			{
+				"label": "The line-height",
+				"type": "range",
+				"css": "line-height",
+				"target": "body",
+				"unit": "",
+				"value": "",
+				"options": {
+					"min": 0.5, 
+					"max": 1.6, 
+					"step": 0.1
+				}
+
+			},
+			{
+				"label": "Bold Headings",
+				"type": "checkbox",
+				"css": "font-weight",
+				"target": "h1, h2, h3, h4, h5, h6",
+				"unit": "",
+				"value": "",
+				"options": [{"false": "normal"}, {"true": "bold"}]
+			}
+		]
+	}
+]
