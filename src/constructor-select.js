@@ -21,7 +21,8 @@ SelectItem.prototype.built = function () {
 	var innerDiv = document.createElement('div');
 
 	for (var i = 0; i < this.items.length; i++) {
-		this.element.innerHTML += '<option>'+ this.items[i] +'</option>';
+		var startTag = (this.value === this.items[i] ? "<option selected>" : "<option>");
+		this.element.innerHTML += startTag + this.items[i] +'</option>';
 	}
 
 	innerDiv.appendChild(this.labelNode);

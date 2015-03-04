@@ -53,6 +53,7 @@ RangeItem.prototype.built = function () {
 	this.element.min  = this.min;
 	this.element.max  = this.max;
 	this.element.step = this.step;
+	if (this.value && this.value >= this.min && this.value <= this.max) this.element.value = this.value;
 
 	innerDiv.appendChild(this.labelNode);
 	innerDiv.appendChild(this.element);
@@ -81,7 +82,8 @@ SelectItem.prototype.built = function () {
 	var innerDiv = document.createElement('div');
 
 	for (var i = 0; i < this.items.length; i++) {
-		this.element.innerHTML += '<option>'+ this.items[i] +'</option>';
+		var startTag = (this.value === this.items[i] ? "<option selected>" : "<option>");
+		this.element.innerHTML += startTag + this.items[i] +'</option>';
 	}
 
 	innerDiv.appendChild(this.labelNode);

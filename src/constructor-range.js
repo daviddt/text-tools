@@ -30,6 +30,7 @@ RangeItem.prototype.built = function () {
 	this.element.min  = this.min;
 	this.element.max  = this.max;
 	this.element.step = this.step;
+	if (this.value) this.element.value = this.value;
 
 	innerDiv.appendChild(this.labelNode);
 	innerDiv.appendChild(this.element);
