@@ -37,10 +37,14 @@ function RangeItem (options) {
 
 	this.element = document.createElement('input');
 
-	this.element.addEventListener('onchange', function(event){
+	this.element.addEventListener('input', function(event){
 		this.value = event.srcElement.value;
-	}, false);
+		this.changeStyle(this.target, this.css, (this.value+this.unit));
+	}.bind(this), false);
 }
+
+RangeItem.prototype = Object.create(Child.prototype);
+RangeItem.prototype.constructor = Child;
 
 /**
  * De build functie voor de HTML op te bouwen
@@ -71,8 +75,12 @@ function SelectItem (options) {
 
 	this.element.addEventListener('input', function(event){
 		this.value = event.srcElement.value;
-	}, false);
+		this.changeStyle(this.target, this.css, (this.value+this.unit));
+	}.bind(this), false);
 }
+
+SelectItem.prototype = Object.create(Child.prototype);
+SelectItem.prototype.constructor = Child;
 
 /**
  * De build functie voor de HTML op te bouwen
@@ -126,6 +134,18 @@ function Child (options) {
 	this.labelNode = label;
 }
 
+Child.prototype.getStyle = function () {
+	return {
+		"target": this.target,
+		"property": this.css,
+		"value": (this.value+this.unit)
+	}
+}
+
+Child.prototype.changeStyle = function (target, property, value) {
+	addCSSRule(sheet, target, property + ":" + value);
+}
+
 
 
 
@@ -133,6 +153,35 @@ function Child (options) {
 
 
 ;/**
+ * Hier maken we een stylesheet aan in de var "sheet"
+ */
+
+var sheet = (function() {
+  // Create the <style> tag
+  var style = document.createElement("style");
+
+  // WebKit hack :(
+  style.appendChild(document.createTextNode(""));
+
+  // Add the <style> element to the page
+  document.head.appendChild(style);
+
+  return style.sheet;
+})();
+
+/**
+ * Functie om makkelijk een regel toe te voegen
+ * addCSSRule(sheet, "header", "float: left");
+ */
+
+function addCSSRule(sheet, selector, rules, index) {
+  if("insertRule" in sheet) {
+    sheet.insertRule(selector + "{" + rules + "}", sheet.cssRules.length);
+  }
+  else if("addRule" in sheet) {
+    sheet.addRule(selector, rules, sheet.cssRules.length);
+  }
+};/**
  * Hier halen we de data op
  */
 
@@ -170,7 +219,9 @@ function buildFields (data) {
 			}
 		}
 	}
+	fields = fields;
 	renderItems(fields);
+	buildInitialCSS(fields);
 }
 
 /**
@@ -191,4 +242,15 @@ function renderItems (fields) {
 		div.appendChild(currentField);
 	}
 	document.body.appendChild(div);
+}
+
+function buildInitialCSS (fields) {
+	for (var i = 0; i < fields.length; i++) {
+		if (fields[i].children.length) {
+			for (var j = 0; j < fields[i].children.length; j++) {
+				var style = fields[i].children[j].getStyle();
+				addCSSRule(sheet, style.target, style.property +":"+ style.value);
+			}
+		}
+	}
 }

@@ -34,6 +34,18 @@ function Child (options) {
 	this.labelNode = label;
 }
 
+Child.prototype.getStyle = function () {
+	return {
+		"target": this.target,
+		"property": this.css,
+		"value": (this.value+this.unit)
+	}
+}
+
+Child.prototype.changeStyle = function (target, property, value) {
+	addCSSRule(sheet, target, property + ":" + value);
+}
+
 
 
 

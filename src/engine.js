@@ -36,7 +36,9 @@ function buildFields (data) {
 			}
 		}
 	}
+	fields = fields;
 	renderItems(fields);
+	buildInitialCSS(fields);
 }
 
 /**
@@ -57,4 +59,15 @@ function renderItems (fields) {
 		div.appendChild(currentField);
 	}
 	document.body.appendChild(div);
+}
+
+function buildInitialCSS (fields) {
+	for (var i = 0; i < fields.length; i++) {
+		if (fields[i].children.length) {
+			for (var j = 0; j < fields[i].children.length; j++) {
+				var style = fields[i].children[j].getStyle();
+				addCSSRule(sheet, style.target, style.property +":"+ style.value);
+			}
+		}
+	}
 }

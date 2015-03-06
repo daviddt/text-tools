@@ -10,8 +10,12 @@ function SelectItem (options) {
 
 	this.element.addEventListener('input', function(event){
 		this.value = event.srcElement.value;
-	}, false);
+		this.changeStyle(this.target, this.css, (this.value+this.unit));
+	}.bind(this), false);
 }
+
+SelectItem.prototype = Object.create(Child.prototype);
+SelectItem.prototype.constructor = Child;
 
 /**
  * De build functie voor de HTML op te bouwen

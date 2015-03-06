@@ -14,10 +14,14 @@ function RangeItem (options) {
 
 	this.element = document.createElement('input');
 
-	this.element.addEventListener('onchange', function(event){
+	this.element.addEventListener('input', function(event){
 		this.value = event.srcElement.value;
-	}, false);
+		this.changeStyle(this.target, this.css, (this.value+this.unit));
+	}.bind(this), false);
 }
+
+RangeItem.prototype = Object.create(Child.prototype);
+RangeItem.prototype.constructor = Child;
 
 /**
  * De build functie voor de HTML op te bouwen
