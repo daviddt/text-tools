@@ -1,27 +1,64 @@
-# text-tools
-Text tools - Work in progress
+## Todo
 
-## Features (waarvan sommige todo)
+* ~~CSS Engine~~
+* Save function
+* Styling
+* Grunt build task
+* More..
 
-* Per element kan er nu een waarde worden aangepast, waardoor we uiteindelijk in de CSS regels apart kunnen aanpassen.
-* UI wordt opgebouwd uit JSON
-* Modulair, makkelijk uit te breiden! Zowel de core als de JSON
-* Meer komen nog...
+## Synopsis
 
-## DONE
+tbc
 
-* constructor base
-* constructor -> select
-* constructor -> range
-* ajax
-* item (object) builder
-* item (html) builder
+## Code Example
 
-## TODO 
+tbc
 
-* ~~**CSS engine**~~
-* **SAVE function**
-* ~~constructor -> checkbox~~
-* ~~constructor -> radio~~
-* Nog veel meer :)
+## Motivation
+
+tbc
+
+## Installation (for development)
+
+npm install
+grunt watch 
+
+## API Reference
+
+tbc
+
+## Tests
+
+tbc
+
+## Contributors
+
+David den Toom
+Vasilis van Gemert
+Joost Faber
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2015 David den Toom, Vasilis van Gemert & Joost Faber
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 
