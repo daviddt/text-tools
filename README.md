@@ -21,6 +21,7 @@ Text tools - Work in progress
 
 * ~~**CSS engine**~~
 * **SAVE function**
-* constructor -> checkbox
+* ~~constructor -> checkbox~~
+* ~~constructor -> radio~~
 * Nog veel meer :)
 

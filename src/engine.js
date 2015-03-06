@@ -31,7 +31,9 @@ function buildFields (data) {
 				} else if (current.type === "range") {
 					fields[i].children.push(new RangeItem(current));
 				} else if (current.type === "checkbox") {
-
+					fields[i].children.push(new CheckboxItem(current));
+				} else if (current.type === "radio") {
+					fields[i].children.push(new RadioItem(current));
 				}
 			}
 		}
@@ -58,7 +60,7 @@ function renderItems (fields) {
 		}
 		div.appendChild(currentField);
 	}
-	document.body.appendChild(div);
+	document.querySelector('aside').appendChild(div);
 }
 
 function buildInitialCSS (fields) {

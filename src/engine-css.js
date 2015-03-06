@@ -20,7 +20,10 @@ var sheet = (function() {
  * addCSSRule(sheet, "header", "float: left");
  */
 
+var prefix = "main" // prefix voor styles
+
 function addCSSRule(sheet, selector, rules, index) {
+  selector = prefix + ' ' + selector;
   if("insertRule" in sheet) {
     sheet.insertRule(selector + "{" + rules + "}", sheet.cssRules.length);
   }

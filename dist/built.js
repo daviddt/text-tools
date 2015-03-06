@@ -24,6 +24,88 @@ function getData (url, callback) {
 };/**
  * Child wordt gecalled als basis
  * Select item wordt ge-extend met:
+ * true / false option
+ */
+
+function CheckboxItem (options) {
+	Child.call(this, options);
+	this.options = options.options;
+
+	this.element = document.createElement('input');
+
+	this.element.addEventListener('click', function(event){
+		this.value = event.target.checked ? this.options[1] : this.options[0];
+		this.changeStyle(this.target, this.css, (this.value+this.unit));
+	}.bind(this), false);
+}
+
+CheckboxItem.prototype = Object.create(Child.prototype);
+CheckboxItem.prototype.constructor = Child;
+
+/**
+ * De build functie voor de HTML op te bouwen
+ */
+
+CheckboxItem.prototype.built = function () {
+	var innerDiv = document.createElement('div');
+
+	this.element.type = "checkbox";
+	this.element.value = this.value;
+
+	innerDiv.appendChild(this.labelNode);
+	innerDiv.appendChild(this.element);
+
+	return innerDiv;
+};/**
+ * Child wordt gecalled als basis
+ * Select item wordt ge-extend met:
+ * alle radio options
+ */
+
+function RadioItem (options) {
+	Child.call(this, options);
+	this.options = options.options;
+
+	this.element = document.createElement('div');
+
+	this.element.addEventListener('click', function(event){
+		if (event.target.type === "radio") {
+			this.value = this.options[event.target.dataset.count];
+			this.changeStyle(this.target, this.css, (this.value+this.unit));
+		}
+	}.bind(this), false);
+}
+
+RadioItem.prototype = Object.create(Child.prototype);
+RadioItem.prototype.constructor = Child;
+
+/**
+ * De build functie voor de HTML op te bouwen
+ */
+
+RadioItem.prototype.built = function () {
+
+	this.element.appendChild(this.labelNode);
+	
+	for (var i = 0; i < this.options.length; i++) {
+		var innerDiv = document.createElement('div');
+		var radio = document.createElement('input')
+			radio.type = "radio";
+			radio.name = this.label;
+			radio.dataset.count = i;
+
+		var innerLabel = document.createElement('label');
+			innerLabel.innerHTML = this.options[i];
+
+		innerDiv.appendChild(innerLabel);
+		innerDiv.appendChild(radio);
+		this.element.appendChild(innerDiv);
+	}
+
+	return this.element;
+};/**
+ * Child wordt gecalled als basis
+ * Select item wordt ge-extend met:
  *	-min
  *	-max
  *	-step
@@ -174,7 +256,10 @@ var sheet = (function() {
  * addCSSRule(sheet, "header", "float: left");
  */
 
+var prefix = "main" // prefix voor styles
+
 function addCSSRule(sheet, selector, rules, index) {
+  selector = prefix + ' ' + selector;
   if("insertRule" in sheet) {
     sheet.insertRule(selector + "{" + rules + "}", sheet.cssRules.length);
   }
@@ -214,7 +299,9 @@ function buildFields (data) {
 				} else if (current.type === "range") {
 					fields[i].children.push(new RangeItem(current));
 				} else if (current.type === "checkbox") {
-
+					fields[i].children.push(new CheckboxItem(current));
+				} else if (current.type === "radio") {
+					fields[i].children.push(new RadioItem(current));
 				}
 			}
 		}
@@ -241,7 +328,7 @@ function renderItems (fields) {
 		}
 		div.appendChild(currentField);
 	}
-	document.body.appendChild(div);
+	document.querySelector('aside').appendChild(div);
 }
 
 function buildInitialCSS (fields) {
